@@ -39,6 +39,15 @@ st.sidebar.markdown("---")
 st.sidebar.subheader("✅ Talebi Tamamla")
 ticket_id_to_update = st.sidebar.number_input("Kapatılacak Bilet ID", min_value=1, step=1)
 
+st.sidebar.markdown("---")
+st.sidebar.subheader("🗑️ Talebi Sil")
+ticket_id_to_delete = st.sidebar.number_input("Silinecek Bilet ID", min_value=1, step=1, key="delete_id")
+
+if st.sidebar.button("Kalıcı Olarak Sil"):
+    manager.delete_ticket(ticket_id_to_delete)
+    st.sidebar.success(f"ID {ticket_id_to_delete} başarıyla silindi!")
+    st.rerun()
+
 if st.sidebar.button("Çözüldü Olarak İşaretle"):
     manager.update_ticket_status(ticket_id_to_update, 'Resolved')
     st.sidebar.success(f"ID {ticket_id_to_update} başarıyla kapatıldı!")
